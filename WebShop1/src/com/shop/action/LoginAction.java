@@ -1,9 +1,12 @@
 package com.shop.action;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.web.context.ContextLoader;
 import org.springframework.web.context.WebApplicationContext;
 
 import com.opensymphony.xwork2.ActionSupport;
+import com.shop.service.impl.ServiceManager;
 import com.shop.service.impl.UserService;
 import com.shop.vo.User;
 
@@ -15,6 +18,15 @@ public class LoginAction extends ActionSupport{
 	private String username;
 	private String password;
 	private UserService userService;
+	private ServiceManager serviceManager;
+
+	public ServiceManager getServiceManager() {
+		return serviceManager;
+	}
+
+	public void setServiceManager(ServiceManager serviceManager) {
+		this.serviceManager = serviceManager;
+	}
 
 	public String getUsername() {
 		return username;
@@ -46,7 +58,10 @@ public class LoginAction extends ActionSupport{
 		user.setPassword(password);
 //		System.out.println("user:"+user.getUname());//ok
 		WebApplicationContext wac = ContextLoader.getCurrentWebApplicationContext();
-		userService = (UserService) wac.getBean("UserService");
+		serviceManager = (ServiceManager) wac.getBean("ServiceManager");
+		userService = (UserService) serviceManager.getUserService();
+//		ApplicationContext ctx = new ClassPathXmlApplicationContext("beans.xml"); 
+//		userService= (UserService)ctx.getBean("UserService");
 		//
 		System.out.println("userservice:"+userService);
 		
@@ -63,8 +78,12 @@ public class LoginAction extends ActionSupport{
 	public boolean checkUser(String uname){
 		User user = new User();
 		user.setUname(uname);
+		System.out.println("ax");
 		WebApplicationContext wac = ContextLoader.getCurrentWebApplicationContext();
-		userService = (UserService) wac.getBean("UserService");
+		serviceManager = (ServiceManager) wac.getBean("ServiceManager");
+		userService = (UserService) serviceManager.getUserService();
+//		ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml"); 
+//		userService= (UserService)ctx.getBean("UserService");
 		//
 		System.out.println("userservice:"+userService);
 		

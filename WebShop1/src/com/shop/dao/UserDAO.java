@@ -7,6 +7,8 @@ import org.hibernate.LockMode;
 import org.springframework.context.ApplicationContext;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
+import com.shop.dao.interfaces.IUserDAO;
+import com.shop.service.IUserService;
 import com.shop.vo.User;
 
 /**
@@ -21,7 +23,7 @@ import com.shop.vo.User;
  * @author MyEclipse Persistence Tools
  */
 
-public class UserDAO extends HibernateDaoSupport {
+public class UserDAO extends HibernateDaoSupport implements IUserDAO{
 	private static final Log log = LogFactory.getLog(UserDAO.class);
 	// property constants
 	public static final String UNAME = "uname";

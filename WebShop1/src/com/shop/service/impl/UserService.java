@@ -6,28 +6,28 @@ import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 
-import com.shop.dao.UserDAO;
+import com.shop.dao.interfaces.IUserDAO;
 import com.shop.service.IUserService;
 import com.shop.vo.User;
 
 public class UserService implements IUserService,ApplicationContextAware{
-	private UserDAO userDao;
+	private IUserDAO userDao;
 	private static ApplicationContext applicationContext;
 
-	public UserDAO getUserDao() {
+	public IUserDAO getUserDao() {
 		return userDao;
 	}
 
 
-	public void setUserDao(UserDAO userDao) {
+	public void setUserDao(IUserDAO userDao) {
 		this.userDao = userDao;
 	}
 
 
 	@Override
 	public User login(User user) {
-		System.out.println("user:"+user);
-		System.out.println("userDAO:"+userDao);
+//		System.out.println("user:"+user);
+//		System.out.println("userDAO:"+userDao);
 		@SuppressWarnings("unchecked")
 		List<User> users = (List<User>) this.userDao.findByExample(user);
 		if(users!=null && users.size()==1){

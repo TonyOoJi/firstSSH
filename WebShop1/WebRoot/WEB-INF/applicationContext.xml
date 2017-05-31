@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+ 	xmlns:tx="http://www.springframework.org/schema/tx"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans.xsd
+http://www.springframework.org/schema/tx
+http://www.springframework.org/schema/tx/spring-tx.xsd
+http://www.springframework.org/schema/aop
+http://www.springframework.org/schema/aop/spring-aop.xsd">
 
 
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
@@ -30,6 +37,7 @@
 			</list>
 		</property>
 	</bean>
+	
 	<bean id="UserDAO" class="com.shop.dao.UserDAO">
 		<property name="sessionFactory">
 			<ref bean="sessionFactory" />
@@ -42,7 +50,72 @@
 		</constructor-arg> -->
 		<property name="userDao" ref="UserDAO"></property>
 	</bean>
-	<bean id="LoginAction" class = "com.shop.action.LoginAction">
+	
+	<bean id="ServiceManager" class = "com.shop.service.impl.ServiceManager">
 		<property name="userService" ref="UserService"></property>
 	</bean>
+	
+	<bean id="LoginAction" class = "com.shop.action.LoginAction">
+		<!-- <property name="serviceManager" ref="ServiceManager"></property> -->
+	</bean>
+	
+	<!-- <bean id="txManager"
+        class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+        <property name="sessionFactory">
+            注入applicationContext.xml中配置的sessionFactory
+            <ref bean="sessionFactory" />
+        </property>
+    </bean>
+    
+	<tx:advice id="txAdvice" transaction-manager="txManager">
+        <tx:attributes>
+            对do开头的方法要求事务
+            <tx:method name="login" propagation="REQUIRED" />
+            <tx:method name="sava*" propagation="REQUIRED" />
+            <tx:method name="*" propagation="REQUIRED"/>
+            对其他方法的配置
+            <tx:method name="*" propagation="SUPPORTS" read-only="true" />
+ 
+        </tx:attributes>
+    </tx:advice>
+	    将事务通知和切入点组合
+    <aop:config>
+        <aop:pointcut expression="execution(* com.shop.dao.*.*(..))" id="pc" />
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="pc" />
+    </aop:config> -->
+
+	
+	<bean id="hibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+	 <bean id="transactionInterceptor" 
+        class="org.springframework.transaction.interceptor.TransactionInterceptor"> 
+        <property name="transactionManager" ref="transactionManager" /> 
+        <!-- 配置事务属性 --> 
+        <property name="transactionAttributes"> 
+            <props> 
+                <prop key="*">PROPAGATION_REQUIRED</prop> 
+            </props> 
+        </property> 
+    </bean>
+    
+    <bean class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator"> 
+        <property name="beanNames"> 
+            <list> 
+                <value>*DAO</value>
+            </list> 
+        </property> 
+        <property name="interceptorNames"> 
+            <list> 
+                <value>transactionInterceptor</value> 
+            </list> 
+        </property> 
+    </bean>
 </beans>
