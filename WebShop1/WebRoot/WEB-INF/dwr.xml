@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<dwr>
+	<allow>
+		<create creator="new" javascript="check">
+			<param name="class" value="com.shop.action.LoginAction" />
+			<include method="checkUser" />
+			
+		</create>
+		<convert converter="bean" match="com.shop.vo.User">
+			<param name="include" value="uname,password" />
+		</convert>
+
+	</allow>
+	<signatures>
+		
+
+	</signatures>
+</dwr>
