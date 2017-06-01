@@ -59,33 +59,32 @@
 		<!-- <property name="serviceManager" ref="ServiceManager"></property> -->
 	</bean>
 	
-	<!-- <bean id="txManager"
+	<bean id="txManager"
         class="org.springframework.orm.hibernate3.HibernateTransactionManager">
         <property name="sessionFactory">
-            注入applicationContext.xml中配置的sessionFactory
+           <!--  注入applicationContext.xml中配置的sessionFactory -->
             <ref bean="sessionFactory" />
         </property>
     </bean>
     
 	<tx:advice id="txAdvice" transaction-manager="txManager">
         <tx:attributes>
-            对do开头的方法要求事务
+          <!--   对do开头的方法要求事务 -->
             <tx:method name="login" propagation="REQUIRED" />
             <tx:method name="sava*" propagation="REQUIRED" />
             <tx:method name="*" propagation="REQUIRED"/>
-            对其他方法的配置
+          <!--   对其他方法的配置 -->
             <tx:method name="*" propagation="SUPPORTS" read-only="true" />
- 
         </tx:attributes>
     </tx:advice>
-	    将事务通知和切入点组合
+	   <!--  将事务通知和切入点组合 -->
     <aop:config>
         <aop:pointcut expression="execution(* com.shop.dao.*.*(..))" id="pc" />
         <aop:advisor advice-ref="txAdvice" pointcut-ref="pc" />
-    </aop:config> -->
+    </aop:config>
 
 	
-	<bean id="hibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate">
+	<!-- <bean id="hibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 	<bean id="transactionManager"
@@ -98,7 +97,7 @@
 	 <bean id="transactionInterceptor" 
         class="org.springframework.transaction.interceptor.TransactionInterceptor"> 
         <property name="transactionManager" ref="transactionManager" /> 
-        <!-- 配置事务属性 --> 
+        配置事务属性 
         <property name="transactionAttributes"> 
             <props> 
                 <prop key="*">PROPAGATION_REQUIRED</prop> 
@@ -118,4 +117,5 @@
             </list> 
         </property> 
     </bean>
+    -->
 </beans>
