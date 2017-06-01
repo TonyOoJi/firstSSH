@@ -20,10 +20,11 @@
 <!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
+<script src="js/jquery-3.2.1.js" type="text/javascript"></script>
 <script type='text/javascript' src='/WebShop1/dwr/interface/check.js'></script>
 <script type='text/javascript' src='/WebShop1/dwr/engine.js'></script>
 <script type='text/javascript' src='/WebShop1/dwr/util.js'></script>
-<script type="text/javascript">
+<script type="text/javascript" src='js/my.js'>
 	function checkUser() {
 		var username = document.all.username.value;
 		check.checkUser(username, onData);
@@ -45,5 +46,8 @@
 		password:<input type="password" name=password><br>
 		<input type="submit" value=submit>
 	</form>
+	<button>abc</button>
+	<br>
+	<div id="div1" style="width:80px;height:80px;display:none;background-color:red;"></div>
 </body>
 </html>
