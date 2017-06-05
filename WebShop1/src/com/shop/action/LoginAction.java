@@ -1,7 +1,5 @@
 package com.shop.action;
 
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.web.context.ContextLoader;
 import org.springframework.web.context.WebApplicationContext;
 
@@ -11,6 +9,7 @@ import com.shop.service.impl.UserService;
 import com.shop.vo.User;
 
 public class LoginAction extends ActionSupport{
+	
 	/**
 	 * 
 	 */
@@ -62,13 +61,9 @@ public class LoginAction extends ActionSupport{
 		userService = (UserService) serviceManager.getUserService();
 //		ApplicationContext ctx = new ClassPathXmlApplicationContext("beans.xml"); 
 //		userService= (UserService)ctx.getBean("UserService");
-		//
-		System.out.println("userservice:"+userService);
-		
+//		System.out.println("userservice:"+userService);
 		User theUser = userService.login(user);
-		//
-		System.out.println("theUser:"+theUser);
-		
+//		System.out.println("theUser:"+theUser);
 		if(theUser!=null){
 			return SUCCESS;
 		}
@@ -78,19 +73,13 @@ public class LoginAction extends ActionSupport{
 	public boolean checkUser(String uname){
 		User user = new User();
 		user.setUname(uname);
-		System.out.println("ax");
 		WebApplicationContext wac = ContextLoader.getCurrentWebApplicationContext();
 		serviceManager = (ServiceManager) wac.getBean("ServiceManager");
 		userService = (UserService) serviceManager.getUserService();
-//		ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml"); 
+//		ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
 //		userService= (UserService)ctx.getBean("UserService");
-		//
-		System.out.println("userservice:"+userService);
-		
+//		System.out.println("userservice:"+userService);
 		User theUser = userService.login(user);
-		//
-		System.out.println("theUser:"+theUser);
-		
 		if(theUser!=null){
 			return true;
 		}

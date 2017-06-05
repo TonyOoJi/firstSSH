@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf8"%>
+<%@ taglib uri="/struts-tags" prefix="s"%>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
@@ -45,7 +46,9 @@
 		username:<input type="text" name=username onblur="checkUser()"><span id="msg"></span><br>
 		password:<input type="password" name=password><br>
 		<input type="submit" value=submit>
+		<s:fielderror></s:fielderror>
 	</form>
+	<a href="regist.jsp">注册</a>
 	<button>abc</button>
 	<br>
 	<div id="div1" style="width:80px;height:80px;display:none;background-color:red;"></div>
