@@ -38,5 +38,7 @@ function checkUser1() {
 		<s:fielderror></s:fielderror>
 		<input type=submit value=submit>
 	</form>
+	<br>
+	<a href="index.jsp">登录</a>
 </body>
 </html>

@@ -60,6 +60,7 @@
 		<span class="btn btn-primary" style="background:white;color:black">尾页</span>
 		</s:else>
 	</span>
+	<a href="${pageContext.request.contextPath}/user/cart.action" style="margin-left:50px;">进入购物车</a>
 </div>
 </body>
 </html>

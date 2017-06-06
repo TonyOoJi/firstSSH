@@ -7,7 +7,12 @@
 			<generator class="native"></generator>
 		</primary-key>
 	</table>
-<table name="commodity" catalog="h_test" class="Commodity">
+	<table name="commodity" catalog="h_test" class="Commodity">
+		<primary-key>
+			<generator class="native"></generator>
+		</primary-key>
+	</table>
+<table name="cart" catalog="h_test" class="Cart">
 	<primary-key>
 		<generator class="native"></generator>
 	</primary-key>

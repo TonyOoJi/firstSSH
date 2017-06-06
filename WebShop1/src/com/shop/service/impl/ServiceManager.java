@@ -4,13 +4,24 @@ import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 
+import com.shop.service.ICartService;
 import com.shop.service.ICommodityService;
 import com.shop.service.IUserService;
 
 public class ServiceManager implements ApplicationContextAware {
 	private IUserService userService;
 	private ICommodityService commodityService;
+	private ICartService cartService;
 	private static ApplicationContext applicationContext;
+	
+	public ICartService getCartService() {
+		return cartService;
+	}
+
+	public void setCartService(ICartService cartService) {
+		this.cartService = cartService;
+	}
+
 	public ICommodityService getCommodityService() {
 		return commodityService;
 	}

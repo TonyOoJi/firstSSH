@@ -23,5 +23,9 @@
 			<result name="success">/homepage.jsp</result>
 			<result name="input">/homepage.jsp</result>
 		</action>
+		
+		<action name="cart" class="CartAction">
+			<result name="success">/cart.jsp</result>
+		</action>
 	</package>
 </struts>    

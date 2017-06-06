@@ -34,7 +34,8 @@
 		<property name="mappingResources">
 			<list>
 				<value>com/shop/vo/User.hbm.xml</value>
-				<value>com/shop/vo/Commodity.hbm.xml</value></list>
+				<value>com/shop/vo/Commodity.hbm.xml</value>
+				<value>com/shop/vo/Cart.hbm.xml</value></list>
 		</property>
 	</bean>
 	
@@ -49,6 +50,12 @@
 			<ref bean="sessionFactory" />
 		</property>
 	</bean>
+	
+	<bean id="CartDAO" class="com.shop.dao.CartDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
 
 	<bean id="UserService" class="com.shop.service.impl.UserService">
 		<property name="userDao" ref="UserDAO"></property>
@@ -56,10 +63,14 @@
 	<bean id="CommodityService" class="com.shop.service.impl.CommodityService">
 		<property name="commodityDAO" ref="CommodityDAO"></property>
 	</bean>
+	<bean id="CartService" class="com.shop.service.impl.CartService">
+		<property name="cartDao" ref="CartDAO"></property>
+	</bean>
 	
 	<bean id="ServiceManager" class = "com.shop.service.impl.ServiceManager">
 		<property name="userService" ref="UserService"></property>
 		<property name="commodityService" ref="CommodityService"></property>
+		<property name="cartService" ref="CartService"></property>
 	</bean>
 	
 	<bean id="LoginAction" class = "com.shop.action.LoginAction" scope="prototype">
@@ -71,6 +82,8 @@
 		<!-- <property name="serviceManager">
 			<ref bean="ServiceManager"/>
 		</property> -->
+	</bean>
+	<bean id="CartAction" class="com.shop.action.CartAction">
 	</bean>
 	
 	
@@ -86,6 +99,7 @@
         <tx:attributes>
             <tx:method name="login" propagation="REQUIRED" />
             <tx:method name="sava*" propagation="REQUIRED" />
+            <tx:method name="find*" propagation="REQUIRED" />
             <tx:method name="*" propagation="REQUIRED"/>
           <!--   对其他方法的配置      read-only="" -->
             <tx:method name="*" propagation="SUPPORTS" read-only="false" />
