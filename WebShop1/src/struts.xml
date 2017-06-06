@@ -21,6 +21,7 @@
 		
 		<action name="home" class="HomeAction" method="getPageList">
 			<result name="success">/homepage.jsp</result>
+			<result name="input">/homepage.jsp</result>
 		</action>
 	</package>
 </struts>    

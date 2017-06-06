@@ -51,9 +51,6 @@
 	</bean>
 
 	<bean id="UserService" class="com.shop.service.impl.UserService">
-		<!-- <constructor-arg>
-			<ref bean="UserDAO" />
-		</constructor-arg> -->
 		<property name="userDao" ref="UserDAO"></property>
 	</bean>
 	<bean id="CommodityService" class="com.shop.service.impl.CommodityService">
@@ -65,12 +62,12 @@
 		<property name="commodityService" ref="CommodityService"></property>
 	</bean>
 	
-	<bean id="LoginAction" class = "com.shop.action.LoginAction">
+	<bean id="LoginAction" class = "com.shop.action.LoginAction" scope="prototype">
 		<!-- <property name="serviceManager" ref="ServiceManager"></property> -->
 	</bean>
-	<bean id="RegistAction" class = "com.shop.action.RegistAction">
+	<bean id="RegistAction" class = "com.shop.action.RegistAction" scope="prototype">
 	</bean>
-	<bean id="HomeAction" class="com.shop.action.HomeAction">
+	<bean id="HomeAction" class="com.shop.action.HomeAction" scope="prototype">
 		<!-- <property name="serviceManager">
 			<ref bean="ServiceManager"/>
 		</property> -->

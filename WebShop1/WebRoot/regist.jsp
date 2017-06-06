@@ -1,8 +1,15 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ taglib uri="/struts-tags" prefix="s"%>
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://"
+			+ request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<base href="<%=basePath%>">
 <script type='text/javascript' src='/WebShop1/dwr/interface/check.js'></script>
 <script type='text/javascript' src='/WebShop1/dwr/engine.js'></script>
 <script type='text/javascript' src='/WebShop1/dwr/util.js'></script>
@@ -23,7 +30,7 @@ function checkUser1() {
 </head>
 <body>
 
-	<form name=regist action="user/regist.action" method="post">
+	<form action="user/regist.action" method="post">
 		username:<input type=text name=uname id=username onblur="checkUser1()" value="${uname}"> <span id="msg"></span><br>
 		password:<input type=password name=password value="${password}"><br>
 		password again:<input type=password name=repassword value="${repassword}"><br> 

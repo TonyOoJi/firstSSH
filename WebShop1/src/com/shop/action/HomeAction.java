@@ -41,7 +41,7 @@ public class HomeAction extends ActionSupport{
 	 public String getPageList() {
 		 	WebApplicationContext wac = ContextLoader.getCurrentWebApplicationContext();
 			serviceManager = (ServiceManager) wac.getBean("ServiceManager");
-	        this.pager = serviceManager.getCommodityService().queryForPage(10, page);
+	        this.pager = serviceManager.getCommodityService().queryForPage(8, page);
 	        return SUCCESS;
 	    }
 }
