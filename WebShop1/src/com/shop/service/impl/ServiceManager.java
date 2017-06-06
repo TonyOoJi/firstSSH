@@ -4,11 +4,22 @@ import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 
+import com.shop.service.ICommodityService;
 import com.shop.service.IUserService;
 
 public class ServiceManager implements ApplicationContextAware {
 	private IUserService userService;
+	private ICommodityService commodityService;
 	private static ApplicationContext applicationContext;
+	public ICommodityService getCommodityService() {
+		return commodityService;
+	}
+
+	public void setCommodityService(ICommodityService commodityService) {
+		this.commodityService = commodityService;
+	}
+
+	
 
 	public IUserService getUserService() {
 		return userService;

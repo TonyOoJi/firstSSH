@@ -34,11 +34,17 @@
 		<property name="mappingResources">
 			<list>
 				<value>com/shop/vo/User.hbm.xml</value>
-			</list>
+				<value>com/shop/vo/Commodity.hbm.xml</value></list>
 		</property>
 	</bean>
 	
 	<bean id="UserDAO" class="com.shop.dao.UserDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+	<bean id="CommodityDAO" class="com.shop.dao.CommodityDAO">
 		<property name="sessionFactory">
 			<ref bean="sessionFactory" />
 		</property>
@@ -50,9 +56,13 @@
 		</constructor-arg> -->
 		<property name="userDao" ref="UserDAO"></property>
 	</bean>
+	<bean id="CommodityService" class="com.shop.service.impl.CommodityService">
+		<property name="commodityDAO" ref="CommodityDAO"></property>
+	</bean>
 	
 	<bean id="ServiceManager" class = "com.shop.service.impl.ServiceManager">
 		<property name="userService" ref="UserService"></property>
+		<property name="commodityService" ref="CommodityService"></property>
 	</bean>
 	
 	<bean id="LoginAction" class = "com.shop.action.LoginAction">
@@ -60,6 +70,12 @@
 	</bean>
 	<bean id="RegistAction" class = "com.shop.action.RegistAction">
 	</bean>
+	<bean id="HomeAction" class="com.shop.action.HomeAction">
+		<!-- <property name="serviceManager">
+			<ref bean="ServiceManager"/>
+		</property> -->
+	</bean>
+	
 	
 	<bean id="txManager"
         class="org.springframework.orm.hibernate3.HibernateTransactionManager">
@@ -119,4 +135,4 @@
         </property> 
     </bean>
     -->
-</beans>
+	</beans>

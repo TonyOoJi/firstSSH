@@ -6,13 +6,21 @@
 
 	<package name="user" namespace="/user" extends="struts-default">
 		<action name="login" class="LoginAction">
-			<result name="success" type="redirect">/homepage.jsp</result>
+			<!-- <result name="success" type="redirectAction">/home</result> -->
+			<result name="success" type="redirectAction">
+				<param name="actionName">home</param>
+				<param name="page">1</param>
+			</result>
 			<result name="input">/index.jsp</result>
 		</action>
 		
 		<action name="regist" class="RegistAction">
 			<result name="success" type="redirect">/success.jsp</result>
 			<result name="input">/regist.jsp</result>
+		</action>
+		
+		<action name="home" class="HomeAction" method="getPageList">
+			<result name="success">/homepage.jsp</result>
 		</action>
 	</package>
 </struts>    
