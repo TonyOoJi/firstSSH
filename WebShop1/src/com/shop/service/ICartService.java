@@ -1,5 +1,9 @@
 package com.shop.service;
 
-public interface ICartService {
+import java.util.List;
 
+import com.shop.vo.User;
+
+public interface ICartService {
+	public List findByUser(User user);
 }

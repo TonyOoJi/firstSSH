@@ -32,6 +32,7 @@ import com.shop.vo.Commodity;
 public class CommodityDAO extends HibernateDaoSupport implements ICommodityDAO{
 	private static final Log log = LogFactory.getLog(CommodityDAO.class);
 	// property constants
+	public static final String COMMODITYID ="commodityid";
 	public static final String COMMODITYINFO = "commodityinfo";
 	public static final String QUANTITY = "quantity";
 
@@ -164,6 +165,12 @@ public class CommodityDAO extends HibernateDaoSupport implements ICommodityDAO{
 			log.error("find by property name failed", re);
 			throw re;
 		}
+	}
+	
+	public Commodity findByCommodityId(int id){
+		List list = findByProperty(COMMODITYID, id);
+		Commodity commodity = (Commodity) (list.size()==1?list.get(0):null);
+		return commodity;
 	}
 
 	public List findByCommodityinfo(Object commodityinfo) {

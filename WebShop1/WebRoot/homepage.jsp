@@ -46,7 +46,7 @@
 		</s:if>
 		<s:else>
 			<a class="btn btn-primary" href="home?page=1">首页&nbsp;&nbsp;&nbsp;&nbsp;</a>
-			<a class="btn btn-primary" href="home?page=<s:property value="%{pager.currentPage-1}"/>">上一页&nbsp;&nbsp;&nbsp;&nbsp;</a>
+			<a class="btn btn-primary" href="home?page=${pager.currentPage-1}">上一页&nbsp;&nbsp;&nbsp;&nbsp;</a>
 		</s:else>
 		
 		第 <s:property value="pager.currentPage" /> 页&nbsp;&nbsp;&nbsp;
@@ -60,7 +60,7 @@
 		<span class="btn btn-primary" style="background:white;color:black">尾页</span>
 		</s:else>
 	</span>
-	<a href="${pageContext.request.contextPath}/user/cart.action" style="margin-left:50px;">进入购物车</a>
+	<a href="${pageContext.request.contextPath}/user/cart.action?userid=${sessionScope.user.uid}" style="margin-left:50px;">进入购物车</a>
 </div>
 </body>
 </html>

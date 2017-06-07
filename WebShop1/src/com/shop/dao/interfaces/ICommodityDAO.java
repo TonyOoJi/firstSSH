@@ -47,4 +47,6 @@ public interface ICommodityDAO{
 
 	public void attachClean(Commodity instance);
 
+	public Commodity findByCommodityId(int id);
+
 }

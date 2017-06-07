@@ -6,6 +6,7 @@ import java.util.Map;
 import com.shop.dao.CommodityDAO;
 import com.shop.dao.interfaces.ICommodityDAO;
 import com.shop.service.ICommodityService;
+import com.shop.vo.Commodity;
 import com.shop.vo.Pager;
 
 public class CommodityService implements ICommodityService {
@@ -39,6 +40,13 @@ public class CommodityService implements ICommodityService {
 		pager.setList(list);
 		pager.init();
 		return pager;
+	}
+
+	@Override
+	public Commodity findById(int id) {
+//		System.out.println("commServoce"+id);
+		Commodity commodity = commodityDAO.findByCommodityId(id);
+		return commodity;
 	}
 
 }

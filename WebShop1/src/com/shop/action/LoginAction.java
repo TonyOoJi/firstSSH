@@ -1,5 +1,13 @@
 package com.shop.action;
 
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.apache.struts2.interceptor.ServletRequestAware;
+import org.apache.struts2.interceptor.ServletResponseAware;
 import org.springframework.web.context.ContextLoader;
 import org.springframework.web.context.WebApplicationContext;
 
@@ -8,7 +16,7 @@ import com.shop.service.impl.ServiceManager;
 import com.shop.service.impl.UserService;
 import com.shop.vo.User;
 
-public class LoginAction extends ActionSupport{
+public class LoginAction extends ActionSupport implements ServletRequestAware,ServletResponseAware{
 	
 	/**
 	 * 
@@ -18,7 +26,38 @@ public class LoginAction extends ActionSupport{
 	private String password;
 	private UserService userService;
 	private ServiceManager serviceManager;
+	private HttpServletRequest request;
+	private HttpServletResponse response;
+	protected Map<String, String> cookies;
+	protected HttpSession session;
+	
+	public HttpSession getSession() {
+		return session;
+	}
 
+	public void setSession(HttpSession session) {
+		this.session = session;
+	}
+
+	public HttpServletResponse getResponse() {
+		return response;
+	}
+
+	public HttpServletRequest getRequest() {
+		return request;
+	}
+
+	@Override
+	public void setServletRequest(HttpServletRequest request) {
+		this.request = request;
+		this.session = request.getSession();
+	}
+	
+	@Override
+	public void setServletResponse(HttpServletResponse response) {
+		this.response = response;
+	}
+	
 	public ServiceManager getServiceManager() {
 		return serviceManager;
 	}
@@ -65,6 +104,7 @@ public class LoginAction extends ActionSupport{
 		User theUser = userService.login(user);
 //		System.out.println("theUser:"+theUser);
 		if(theUser!=null){
+			session.setAttribute("user", theUser);
 			return SUCCESS;
 		}
 		return INPUT;

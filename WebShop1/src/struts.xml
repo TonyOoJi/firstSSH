@@ -26,6 +26,7 @@
 		
 		<action name="cart" class="CartAction">
 			<result name="success">/cart.jsp</result>
+			<result name="input">/index.jsp</result>
 		</action>
 	</package>
 </struts>    
