@@ -28,4 +28,6 @@ public interface ICartDAO {
 	public void attachDirty(Cart instance);
 
 	public void attachClean(Cart instance);
+	
+	public void updateById(Cart cart);
 }

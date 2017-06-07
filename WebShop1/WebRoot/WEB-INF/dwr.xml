@@ -2,11 +2,20 @@
 
 <dwr>
 	<allow>
-		<create creator="new" javascript="check">
+		<!-- <create creator="new" javascript="check">
 			<param name="class" value="com.shop.action.LoginAction" />
 			<include method="checkUser" />
-			
+		</create> -->
+		<create creator="new" javascript="check">
+			<param name="class" value="com.shop.test.TestDwr" />
+			<include method="checkUser" />
+			<include method="addToCart" />
 		</create>
+		
+		<convert converter="bean" match="com.shop.vo.Cart">
+			<param name="include" value="userid,commodityid" />
+		</convert>
+		
 		<convert converter="bean" match="com.shop.vo.User">
 			<param name="include" value="uname,password" />
 		</convert>

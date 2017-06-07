@@ -110,6 +110,15 @@ public class LoginAction extends ActionSupport implements ServletRequestAware,Se
 		return INPUT;
 	}
 	
+	public String logout(){
+		session.removeAttribute("user");
+		if(session.getAttribute("user")==null){
+			return SUCCESS;
+		}
+		return INPUT;
+		
+	}
+	
 	public boolean checkUser(String uname){
 		User user = new User();
 		user.setUname(uname);

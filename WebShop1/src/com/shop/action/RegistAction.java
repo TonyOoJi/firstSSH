@@ -56,10 +56,21 @@ public class RegistAction extends ActionSupport implements ModelDriven<User> {
 		serviceManager = (ServiceManager) wac.getBean("ServiceManager");
 		userService = (UserService) serviceManager.getUserService();
 		// System.out.println(userService);
-		if (userService != null) {
+		if (userService != null && !checkUser(user.getUname())) {
 			userService.saveUser(user);
 			return SUCCESS;
 		}
 		return INPUT;
+	}
+	
+	public boolean checkUser(String uname){
+		User user = new User();
+		user.setUname(uname);
+		userService = (UserService) serviceManager.getUserService();
+		User theUser = userService.login(user);
+		if(theUser!=null){
+			return true;
+		}
+		return false;
 	}
 }

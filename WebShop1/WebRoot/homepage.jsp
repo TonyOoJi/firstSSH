@@ -6,9 +6,33 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<script type='text/javascript' src='/WebShop1/dwr/interface/check.js'></script>
+<script type='text/javascript' src='/WebShop1/dwr/engine.js'></script>
+<script type='text/javascript' src='/WebShop1/dwr/util.js'></script>
+<script type="text/javascript">
+	function add(userid,commodityid) {
+		var commodity={};
+		commodity.userid = userid;
+		commodity.commodityid = commodityid;
+		check.addToCart(commodity,onData);
+	}
+	function onData(data) {
+		if (data == true) {
+			alert("ok");
+		} else
+			alert("error");
+	}
+</script>
 <title>WEBSHOP</title>
 </head>
 <body>
+<s:if test="#session.user==null">
+	<a class="btn btn-primary" href="${pageContext.request.contextPath}/user/login.action">登录</a>
+</s:if>
+<s:elseif test="#session.user!=null">
+<a class="btn btn-primary" href="${pageContext.request.contextPath}/user/logout.action">登出</a>
+</s:elseif>
+
 <div class="center-block" style="width:1000px">
 	<br>
 	<h1 style="color:#2697FF;wdith:200px;margin-left:280px">&nbsp;&nbsp;WEBSHOP</h1>
@@ -21,6 +45,7 @@
 			<th>数量</th>
 			<th style="width:10px;">加入购物车</th>
 		</tr>
+		<!-- 购物车DWR,参数用EL表达式-->
 		<s:iterator value="pager.list">
 			<tr>
 				<td><s:property value="commodityid" />
@@ -29,8 +54,7 @@
 				</td>
 				<td><s:property value="quantity" />
 				</td>
-				<!-- 购物车action地址-->
-				<td class="btn btn-primary" style="background:transparent;color:black;"><a href="">添加</a></td>
+				<td class="btn btn-primary" style="background:transparent;color:black;"><a onclick="add(${sessionScope.user.uid},${commodityid})" href="">添加</a></td>
 			</tr>
 		</s:iterator>
 	</table>

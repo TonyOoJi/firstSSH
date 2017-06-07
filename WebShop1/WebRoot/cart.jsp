@@ -42,6 +42,7 @@
 			<tr>
 				<td><s:property value="#cart.commodityid" /></td>
 				<td>
+				<!-- 遍历商品名字的list ，相同的id就显示 -->
 					<s:iterator value="commodityList" id="commodity">
 						<s:if test="#commodity.commodityid==#cart.commodityid">
 							<s:property value="#commodity.commodityinfo"/>

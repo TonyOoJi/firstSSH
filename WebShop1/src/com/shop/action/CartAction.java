@@ -61,6 +61,7 @@ public class CartAction extends ActionSupport implements ServletRequestAware {
 					.getCurrentWebApplicationContext();
 			serviceManager = (ServiceManager) wac.getBean("ServiceManager");
 			cartList = serviceManager.getCartService().findByUser(user);
+			//通过id查询出cartlist中所有cart的commodity的info
 			for(int i=0; i<cartList.size();i++){
 				//清空
 				commodityList.clear();
