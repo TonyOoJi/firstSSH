@@ -39,7 +39,7 @@ public class TestDwr {
 		if(list.size()>=1){
 			Cart carttemp = (Cart) list.get(0);
 			carttemp.setQuantity(carttemp.getQuantity()+1);
-			System.out.println(carttemp.getQuantity());
+//			System.out.println(carttemp.getQuantity());
 			cartService.updateById(carttemp);
 			i++;
 		}else {
